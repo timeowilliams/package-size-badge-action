@@ -12,7 +12,9 @@ import * as core from "@actions/core";
 
     // Step 2: Install necessary dependencies
     console.log("Installing size-limit dependencies...");
-    execSync("npm install size-limit @size-limit/preset-app", { stdio: "inherit" });
+    execSync("npm install size-limit @size-limit/preset-app", {
+      stdio: "inherit",
+    });
 
     // Step 3: Run size-limit to generate the report
     console.log("Running size-limit...");
