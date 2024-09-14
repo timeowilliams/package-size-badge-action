@@ -26,5 +26,3 @@ outputs:
 runs:
   using: "node20"
   main: "size-limit.js"
-  pre:
-    - run: npm install size-limit @size-limit/preset-app
