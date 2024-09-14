@@ -16,29 +16,27 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # Set Node.js version to 20
+          node-version: "20"
 
-      # Clean the npm cache to ensure a fresh install of dependencies
       - name: Clean npm cache
         run: npm cache clean --force
 
-      # Install dependencies using npm ci for a clean installation
       - name: Install dependencies
         run: npm ci
 
-      # Debugging step to list files in the build directory to ensure the path is correct
       - name: List files in build directory
         run: ls -R build/static/js/
 
       - name: Run Package Size Badge Action
-        uses: ./
+        uses: ./ # This will use the local action in the current repo
         with:
-          path: "build/static/js/*.js" # Path to the JS files to check size
-          preset: "app" # Define preset: 'app', 'big-lib', or 'small-lib'
+          path: "build/static/js/*.js"
+          preset: "app"
           label: "Bundle Size"
-          limit: "500" # Set size limit in KB
-          color: "green" # Badge color
+          limit: "500"
+          color: "green"
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACTIONS_RUNNER_DEBUG: true
 
     timeout-minutes: 10
