@@ -28,5 +28,5 @@ outputs:
     description: "The size of the bundle in KB"
 
 runs:
-  using: "node20"
+  using: "node12"
   main: "dist/index.js"
