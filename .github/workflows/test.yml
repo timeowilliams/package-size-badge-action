@@ -1,12 +1,13 @@
-name: "Run Size Limit Test"
+name: "Package Size Badge"
 
 on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
-  run-size-limit:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,16 +19,28 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Clean npm cache
-        run: npm cache clean --force
-
       - name: Install dependencies
         run: npm ci
 
-      - name: List files in build directory
-        run: ls -R build/static/js/
+      - name: Run size-limit to calculate bundle size
+        id: size-limit # We capture the size-limit output here
+        run: |
+          npx size-limit --json > size-report.json
+          size=$(cat size-report.json | jq '.[0].size' | xargs -I {} echo "{}/1024" | bc)
+          echo "size=${size}" >> $GITHUB_ENV
+        # jq is used to extract the size from the JSON report
+        # The size is divided by 1024 to convert bytes to KB and stored in the environment variable
 
-      - name: Run size-limit
-        run: npx size-limit --json || node size-limit.js
+      - name: Generate badge URL
+        id: generate-badge
+        run: |
+          size=${{ env.size }}
+          echo "Badge URL: https://img.shields.io/badge/Bundle_Size-${size}KB-green"
+          echo "badge-url=https://img.shields.io/badge/Bundle_Size-${size}KB-green" >> $GITHUB_ENV
+          echo "Badge URL: https://img.shields.io/badge/Bundle_Size-${size}KB-green" > badge-url.txt
 
-    timeout-minutes: 10
+      - name: Upload badge URL artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-size-badge
+          path: badge-url.txt

@@ -31,7 +31,7 @@ jobs:
         run: ls -R build/static/js/
 
       - name: Run Package Size Badge Action
-        uses: ./ # This will use the local action in the current repo
+        uses: ./
         with:
           path: "build/static/js/*.js"
           preset: "app"

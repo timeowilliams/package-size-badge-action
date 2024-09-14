@@ -1,6 +1,6 @@
 import { execSync } from "child_process";
 import fs from "fs";
-import core from "@actions/core";
+import * as core from "@actions/core";
 
 (async function run() {
   try {
@@ -12,18 +12,18 @@ import core from "@actions/core";
 
     // Step 2: Ensure size-limit config is written to package.json
     const packageJsonPath = "./package.json";
-    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
+    // const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
 
-    // Update size-limit config if it doesn't exist
-    packageJson["size-limit"] = [
-      {
-        path: path,
-        limit: limit,
-      },
-    ];
+    // // Update size-limit config if it doesn't exist
+    // packageJson["size-limit"] = [
+    //   {
+    //     path: path,
+    //     limit: limit,
+    //   },
+    // ];
 
-    // Write updated config to package.json
-    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+    // // Write updated config to package.json
+    // fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
     console.log("Updated size-limit config in package.json");
 
     // Step 3: Run size-limit to generate the report
