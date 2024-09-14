@@ -39,7 +39,7 @@ outputs:
     description: "Size of the JavaScript bundle (in KB)"
 
 runs:
-  using: "node:latest"
+  using: "node20"
   main: "size-limit.js"
 
 branding:
