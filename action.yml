@@ -1,0 +1,47 @@
+name: "Package Size Badge Action"
+description: "GitHub Action to calculate JavaScript package size and create a dynamic badge."
+author: "Your Name"
+
+inputs:
+  github_token:
+    description: "GitHub token for repository access"
+    required: true
+  path:
+    description: "Path to the JavaScript bundle(s) to be analyzed"
+    required: true  # Users must specify the path
+  label:
+    description: "Label for the badge (e.g., Bundle Size)"
+    required: false
+    default: "Bundle Size"
+  limit:
+    description: "Optional size limit for the bundle (in KB)"
+    required: false
+    default: "500"
+  preset:
+    description: "Size Limit preset to use (e.g., app, big-lib, small-lib)"
+    required: true
+    default: "app"
+  color:
+    description: "Badge color"
+    required: false
+    default: "blue"
+  fail_on_limit:
+    description: "Whether to fail if the bundle size exceeds the limit"
+    required: false
+    default: "true"
+  branch:
+    description: "Branch to update the README with the badge"
+    required: false
+    default: "main"
+
+outputs:
+  size:
+    description: "Size of the JavaScript bundle (in KB)"
+
+runs:
+  using: "node:latest"
+  main: "size-limit.js"
+
+branding:
+  icon: "package"
+  color: "blue"

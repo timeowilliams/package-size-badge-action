@@ -1,0 +1,3 @@
+{
+  "error": "SizeLimitError: Create Size Limit config in *package.json*\n    at getConfig (file:///Users/timeo/github-actions/package-size-badge-action/node_modules/size-limit/get-config.js:148:32)\n    at async default (file:///Users/timeo/github-actions/package-size-badge-action/node_modules/size-limit/run.js:74:14)"
+}

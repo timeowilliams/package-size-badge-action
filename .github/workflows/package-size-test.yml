@@ -1,0 +1,30 @@
+name: "Package Size Test"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Package Size Badge Action
+        uses: ./  # This will use the local action in the current repo
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          path: "build/static/js/*.js"  # Path to the JS files to check size
+          preset: "app"  # Define preset: 'app', 'big-lib', or 'small-lib'
+          label: "Bundle Size"
+          limit: "500"  # Set size limit in KB
+          color: "green"  # Badge color
