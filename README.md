@@ -21,7 +21,8 @@ jobs:
         uses: your-username/package-size-badge-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          path: "build/static/js/*.js"  # User specifies the path to their JS bundles
-          preset: "app"  # Can be "app", "big-lib", or "small-lib"
-          limit: "300"  # Optional size limit (in KB)
-          color: "green"  # Optional badge color
+          path: "build/static/js/*.js" # User specifies the path to their JS bundles
+          preset: "app" # Can be "app", "big-lib", or "small-lib"
+          limit: "300" # Optional size limit (in KB)
+          color: "green" # Optional badge color
+```

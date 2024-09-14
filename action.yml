@@ -8,7 +8,7 @@ inputs:
     required: true
   path:
     description: "Path to the JavaScript bundle(s) to be analyzed"
-    required: true  # Users must specify the path
+    required: true # Users must specify the path
   label:
     description: "Label for the badge (e.g., Bundle Size)"
     required: false

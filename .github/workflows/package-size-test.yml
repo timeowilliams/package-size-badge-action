@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,11 +20,10 @@ jobs:
         run: npm install
 
       - name: Run Package Size Badge Action
-        uses: ./  # This will use the local action in the current repo
+        uses: ./ # This will use the local action in the current repo
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          path: "build/static/js/*.js"  # Path to the JS files to check size
-          preset: "app"  # Define preset: 'app', 'big-lib', or 'small-lib'
+          path: "build/static/js/*.js" # Path to the JS files to check size
+          preset: "app" # Define preset: 'app', 'big-lib', or 'small-lib'
           label: "Bundle Size"
-          limit: "500"  # Set size limit in KB
-          color: "green"  # Badge color
+          limit: "500" # Set size limit in KB
+          color: "green" # Badge color
