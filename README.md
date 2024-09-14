@@ -26,12 +26,14 @@ jobs:
 
       # Analyze the bundle size and create a badge
       - name: Analyze and Create Badge
-        uses: timeowilliams/package-size-badge-action@latest # Use @latest to always get the most recent version
+        uses: timeowilliams/package-size-badge-action@1.0.3
         with:
           path: "build/static/js/*.js" # User specifies the path to their JS bundle
           limit: "500 KB" # Bundle size limit
           label: "Bundle Size"
           color: "green"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### Inputs
