@@ -567,62 +567,54 @@
                 "data-testid": "buyer-broker-table",
                 children: [
                   (0, o.jsx)("thead", {
-                    children: v
-                      .getHeaderGroups()
-                      .map((e) =>
-                        (0, o.jsx)(
-                          "tr",
-                          {
-                            children: e.headers.map((e) =>
-                              (0, o.jsx)(
-                                "th",
-                                {
-                                  className: "table-header",
-                                  children: e.isPlaceholder
-                                    ? null
-                                    : (0, u.Kv)(
-                                        e.column.columnDef.header,
-                                        e.getContext(),
-                                      ),
-                                },
-                                e.id,
-                              ),
-                            ),
-                          },
-                          e.id,
-                        ),
-                      ),
-                  }),
-                  (0, o.jsx)("tbody", {
-                    children: v
-                      .getRowModel()
-                      .rows.map((e) =>
-                        (0, o.jsx)(
-                          "tr",
-                          {
-                            "data-testid": "table-row-".concat(
-                              e.original.mlsId,
-                            ),
-                            children: e
-                              .getVisibleCells()
-                              .map((e) =>
-                                (0, o.jsx)(
-                                  "td",
-                                  {
-                                    className: "table-cell",
-                                    "data-label": e.column.columnDef.header,
-                                    children: (0, u.Kv)(
-                                      e.column.columnDef.cell,
+                    children: v.getHeaderGroups().map((e) =>
+                      (0, o.jsx)(
+                        "tr",
+                        {
+                          children: e.headers.map((e) =>
+                            (0, o.jsx)(
+                              "th",
+                              {
+                                className: "table-header",
+                                children: e.isPlaceholder
+                                  ? null
+                                  : (0, u.Kv)(
+                                      e.column.columnDef.header,
                                       e.getContext(),
                                     ),
-                                  },
-                                  e.id,
-                                ),
-                              ),
-                          },
-                          e.id,
-                        ),
+                              },
+                              e.id,
+                            ),
+                          ),
+                        },
+                        e.id,
                       ),
+                    ),
+                  }),
+                  (0, o.jsx)("tbody", {
+                    children: v.getRowModel().rows.map((e) =>
+                      (0, o.jsx)(
+                        "tr",
+                        {
+                          "data-testid": "table-row-".concat(e.original.mlsId),
+                          children: e.getVisibleCells().map((e) =>
+                            (0, o.jsx)(
+                              "td",
+                              {
+                                className: "table-cell",
+                                "data-label": e.column.columnDef.header,
+                                children: (0, u.Kv)(
+                                  e.column.columnDef.cell,
+                                  e.getContext(),
+                                ),
+                              },
+                              e.id,
+                            ),
+                          ),
+                        },
+                        e.id,
+                      ),
+                    ),
                   }),
                 ],
               }),

@@ -15,15 +15,19 @@ jobs:
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
 
       - name: Run Package Size Badge Action
-        uses: ./ # This will use the local action in the current repo
+        uses: ./
         with:
           path: "build/static/js/*.js" # Path to the JS files to check size
           preset: "app" # Define preset: 'app', 'big-lib', or 'small-lib'
           label: "Bundle Size"
           limit: "500" # Set size limit in KB
           color: "green" # Badge color
+
+    timeout-minutes: 10

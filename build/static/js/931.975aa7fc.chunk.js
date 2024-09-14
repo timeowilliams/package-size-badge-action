@@ -1965,16 +1965,14 @@
                   var n;
                   (t = null != (n = t) ? n : !e.getIsAllColumnsVisible()),
                     e.setColumnVisibility(
-                      e
-                        .getAllLeafColumns()
-                        .reduce(
-                          (e, n) => ({
-                            ...e,
-                            [n.id]:
-                              t || !(null != n.getCanHide && n.getCanHide()),
-                          }),
-                          {},
-                        ),
+                      e.getAllLeafColumns().reduce(
+                        (e, n) => ({
+                          ...e,
+                          [n.id]:
+                            t || !(null != n.getCanHide && n.getCanHide()),
+                        }),
+                        {},
+                      ),
                     );
                 }),
                 (e.getIsAllColumnsVisible = () =>
