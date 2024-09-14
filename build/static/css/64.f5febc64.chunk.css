@@ -1,0 +1,109 @@
+.resources-main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+  min-height: 100vh;
+  width: 100vw;
+}
+.resources-heading h1 {
+  color: var(--tertiary-color);
+  font-size: 3.3vw;
+  padding-bottom: 2vh;
+  padding-top: 23vh;
+}
+.resources-list {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
+}
+.resource-item {
+  background-color: var(--senary-color);
+  border-radius: 10px;
+  box-shadow: 0 0 10px #0000001a;
+  margin-bottom: 3vh;
+  padding: 4vh;
+  text-align: left;
+  width: 60%;
+}
+.resource-item h2 {
+  color: var(--secondary-color);
+  font-size: 1.8vw;
+}
+.resource-item p {
+  color: var(--tertiary-color);
+  font-size: 1.2vw;
+  margin-bottom: 2vh;
+}
+.download-button {
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  color: #fff;
+  display: inline-block;
+  padding: 1vh 2vh;
+  text-decoration: none;
+}
+.download-button:hover {
+  cursor: pointer;
+}
+.lock-screen {
+  align-items: center;
+  background-color: #000000b3;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 9999;
+}
+.lock-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+}
+.lock-content input {
+  font-size: 16px;
+  margin-right: 10px;
+  padding: 10px;
+}
+.lock-content button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+.lock-content button:hover {
+  background-color: #0056b3;
+}
+.blurred {
+  filter: blur(8px);
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+@media screen and (max-width: 768px) {
+  .resource-item {
+    width: 90%;
+  }
+  .resources-heading h1 {
+    font-size: 6vw;
+  }
+  .resource-item h2 {
+    font-size: 4vw;
+  }
+  .resource-item p {
+    font-size: 3vw;
+  }
+  .download-button {
+    padding: 2vh 4vh;
+  }
+}
+/*# sourceMappingURL=64.f5febc64.chunk.css.map*/

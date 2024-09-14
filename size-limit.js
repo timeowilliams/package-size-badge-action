@@ -5,46 +5,31 @@ import github from "@actions/github";
 
 (async function run() {
   try {
-    // Step 1: Get the path and preset input from the user
-    const path = core.getInput("path"); // Path to the JS files
-    const preset = core.getInput("preset") || "app"; // Default to "app" preset
+    // Step 1: Get the path and limit inputs from the user
+    const path = core.getInput("path") || "build/static/js/*.js"; // Default path to JS files
+    const limit = core.getInput("limit") || "500 KB"; // Default size limit
+    const label = core.getInput("label") || "Bundle Size"; // Badge label
+    const color = core.getInput("color") || "blue"; // Badge color
 
-    // Step 2: Install the appropriate preset based on the user's input
-    let presetPackage;
-    switch (preset) {
-      case "big-lib":
-        presetPackage = "@size-limit/preset-big-lib";
-        break;
-      case "small-lib":
-        presetPackage = "@size-limit/preset-small-lib";
-        break;
-      case "app":
-      default:
-        presetPackage = "@size-limit/preset-app";
-        break;
-    }
+    // Step 2: Ensure size-limit config is written to package.json
+    const packageJsonPath = "./package.json";
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
 
+    // Update size-limit config if it doesn't exist
+    packageJson["size-limit"] = [
+      {
+        path: path,
+        limit: limit,
+      },
+    ];
+
+    // Write updated config to package.json
+    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+    console.log("Updated size-limit config in package.json");
+
+    // Step 3: Run size-limit to generate the report
     try {
-      // Ensure the preset is installed (you can omit this if presets are always pre-installed)
-      execSync(`npm install --save-dev ${presetPackage}`);
-
-      // Step 3: Run size-limit with the user-defined path
-      const config = {
-        "size-limit": [
-          {
-            path: path,
-            preset: preset,
-          },
-        ],
-      };
-
-      // Write a temporary size-limit config file based on user input
-      fs.writeFileSync("size-limit.config.json", JSON.stringify(config));
-
-      // Run size-limit using the generated config file
-      execSync(
-        "npx size-limit --config size-limit.config.json --json > size-report.json",
-      );
+      execSync("npx size-limit --json > size-report.json");
     } catch (error) {
       core.setFailed(
         "Failed to run size-limit. Ensure size-limit is installed and configured correctly.",
@@ -68,30 +53,11 @@ import github from "@actions/github";
     core.setOutput("size", size);
     console.log(`Bundle size: ${size} KB`);
 
-    // Step 6: Retrieve user-defined inputs for label and color
-    const label = core.getInput("label") || "Bundle Size";
-    const limit = parseInt(core.getInput("limit"), 10) || 500; // Default limit is 500 KB
-    const color = core.getInput("color") || "blue"; // Badge color, default is blue
-    const failOnLimit = core.getInput("fail_on_limit") === "true";
-
-    // Step 7: Check if the size exceeds the limit
-    if (size > limit) {
-      if (failOnLimit) {
-        core.setFailed(
-          `Bundle size exceeds the limit of ${limit} KB: ${size} KB`,
-        );
-      } else {
-        console.log(
-          `Warning: Bundle size exceeds the limit of ${limit} KB: ${size} KB`,
-        );
-      }
-    }
-
-    // Step 8: Create the badge URL using shields.io
+    // Step 6: Create the badge URL using shields.io
     const badgeUrl = `https://img.shields.io/badge/${encodeURIComponent(label)}-${size}KB-${color}`;
     console.log(`Badge URL: ${badgeUrl}`);
 
-    // Step 9: Optionally, commit the badge to the repository
+    // Step 7: Optionally, commit the badge to the repository
     const githubToken = core.getInput("github_token");
     if (githubToken) {
       const octokit = github.getOctokit(githubToken);

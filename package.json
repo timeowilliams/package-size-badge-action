@@ -20,5 +20,11 @@
   },
   "devDependencies": {
     "prettier": "^3.3.3"
-  }
+  },
+  "size-limit": [
+    {
+      "path": "build/static/js/*.js",
+      "limit": "500 KB"
+    }
+  ]
 }

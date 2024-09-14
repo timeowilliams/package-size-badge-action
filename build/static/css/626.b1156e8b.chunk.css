@@ -1,0 +1,132 @@
+.table-container {
+  margin-bottom: 40px;
+}
+.buyer-broker-table {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: #fff9;
+  border-collapse: collapse;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px #0000001a;
+}
+.table-header {
+  background-color: #f3f4f6b3;
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 12px;
+  text-align: left;
+  text-transform: uppercase;
+}
+.table-cell {
+  border-bottom: 1px solid #e5e7ebb3;
+  padding: 12px;
+}
+.buyer-broker-table tbody tr:hover {
+  background-color: #f9fafbcc;
+}
+.table-footer-space {
+  height: 60px;
+}
+.button {
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 5px;
+  padding: 8px 12px;
+  transition: background-color 0.3s ease;
+}
+.button:hover {
+  background-color: #0056b3;
+}
+.button.cancel {
+  background-color: #6c757d;
+  color: #fff;
+}
+.button.delete {
+  background-color: #dc3545;
+  color: #fff;
+}
+.button.cancel:hover,
+.button.delete:hover {
+  opacity: 0.85;
+}
+@media (max-width: 768px) {
+  .table-cell,
+  .table-header {
+    word-wrap: break-word;
+    font-size: 0.6rem;
+    text-align: left;
+  }
+  .table-container {
+    overflow-x: visible;
+    width: 90%;
+  }
+  .buyer-broker-table {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: #fff9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px #0000001a;
+    width: 70%;
+  }
+  .buyer-broker-table thead {
+    background-color: #ffffffe6;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+  .email-column,
+  td[data-label="Email"] {
+    display: none;
+  }
+}
+.page-title {
+  font-size: 50px;
+}
+.child-text {
+  font-size: large;
+  font-weight: 350;
+  line-height: 1.5;
+  padding-bottom: 3vh;
+  text-align: center;
+  width: 80%;
+}
+.listings-manager-loading {
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+.listings-manager-loaded {
+  align-items: center;
+  animation: fadeInLayers 1.5s ease-in-out forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 1;
+}
+@keyframes fadeInLayers {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media screen and (max-width: 768px) {
+  .page-title {
+    font-size: 40px;
+    text-align: center;
+  }
+  .child-text {
+    font-size: medium;
+    text-align: center;
+    width: 80%;
+  }
+  .listings-manager-loaded {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+}
+/*# sourceMappingURL=626.b1156e8b.chunk.css.map*/

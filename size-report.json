@@ -1,3 +1,10 @@
-{
-  "error": "SizeLimitError: Create Size Limit config in *package.json*\n    at getConfig (file:///Users/timeo/github-actions/package-size-badge-action/node_modules/size-limit/get-config.js:148:32)\n    at async default (file:///Users/timeo/github-actions/package-size-badge-action/node_modules/size-limit/run.js:74:14)"
-}
+[
+  {
+    "name": "build/static/js/185.429a2126.chunk.js, build/static/js/626.15bb6c28.chunk.js, build/static/js/64.598988a1.chunk.js, build/static/js/697.9f7783d2.chunk.js, build/static/js/931.975aa7fc.chunk.js, build/static/js/main.eaf3af8c.js",
+    "passed": true,
+    "size": 88048,
+    "sizeLimit": 500000,
+    "running": 2.9568000000000003,
+    "loading": 1.7196875
+  }
+]
