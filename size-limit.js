@@ -1,7 +1,6 @@
 import { execSync } from "child_process";
 import fs from "fs";
 import * as core from "@actions/core";
-import * as github from "@actions/github";
 
 (async function run() {
   try {
@@ -12,10 +11,10 @@ import * as github from "@actions/github";
     const color = core.getInput("color") || "blue"; // Badge color
 
     // Step 2: Install necessary dependencies
-    console.log("Installing size-limit dependencies...");
-    execSync("npm install size-limit @size-limit/preset-app", {
-      stdio: "inherit",
-    });
+    // console.log("Installing size-limit dependencies...");
+    // execSync("npm install size-limit @size-limit/preset-app", {
+    //   stdio: "inherit",
+    // });
 
     // Step 3: Run size-limit to generate the report
     console.log("Running size-limit...");
