@@ -26,7 +26,7 @@ jobs:
 
       # Analyze the bundle size and create a badge
       - name: Analyze and Create Badge
-        uses: timeowilliams/package-size-badge-action@1.0.3
+        uses: timeowilliams/package-size-badge-action@v1.0.3
         with:
           path: "build/static/js/*.js" # User specifies the path to their JS bundle
           limit: "500 KB" # Bundle size limit

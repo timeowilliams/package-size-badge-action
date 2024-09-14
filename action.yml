@@ -1,8 +1,9 @@
 name: "Package Size Badge Action"
 description: "Automatically calculate JavaScript bundle size and generate a badge"
-author: "Timeo Williams"
-icon: "activity"
-color: "green"
+author: "Timeo Williams <timeo.j.williams@gmail.com>"
+branding:
+  icon: "activity"
+  color: "green"
 
 inputs:
   path:
@@ -21,10 +22,11 @@ inputs:
     description: "Badge color"
     required: false
     default: "blue"
+
 outputs:
   size:
     description: "The size of the bundle in KB"
 
 runs:
   using: "node20"
-  main: "size-limit.js"
+  main: "dist/index.js"
