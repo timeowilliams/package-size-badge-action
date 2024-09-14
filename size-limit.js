@@ -10,42 +10,21 @@ import * as core from "@actions/core";
     const label = core.getInput("label") || "Bundle Size"; // Badge label
     const color = core.getInput("color") || "blue"; // Badge color
 
-    // Step 2: Ensure size-limit config is written to package.json
-    const packageJsonPath = "./package.json";
-    // const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
-
-    // // Update size-limit config if it doesn't exist
-    // packageJson["size-limit"] = [
-    //   {
-    //     path: path,
-    //     limit: limit,
-    //   },
-    // ];
-
-    // // Write updated config to package.json
-    // fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-    console.log("Updated size-limit config in package.json");
+    // Step 2: Install necessary dependencies
+    console.log("Installing size-limit dependencies...");
+    execSync("npm install size-limit @size-limit/preset-app", { stdio: "inherit" });
 
     // Step 3: Run size-limit to generate the report
-    try {
-      console.log("Running size-limit...");
-      execSync("npx size-limit --json > size-report.json", {
-        stdio: "inherit",
-      });
-      console.log("Size limit executed successfully");
-    } catch (error) {
-      core.setFailed(`Failed to run size-limit: ${error.message}`);
-      return;
-    }
+    console.log("Running size-limit...");
+    execSync("npx size-limit --json > size-report.json", { stdio: "inherit" });
+    console.log("Size limit executed successfully");
 
     // Step 4: Parse the size-limit output
     let report;
     try {
       report = JSON.parse(fs.readFileSync("size-report.json", "utf8"));
     } catch (error) {
-      core.setFailed(
-        "Error parsing size-limit output. Ensure the build process was successful.",
-      );
+      core.setFailed("Error parsing size-limit output.");
       return;
     }
 
@@ -53,6 +32,10 @@ import * as core from "@actions/core";
     const size = Math.round(report[0].size / 1024); // Convert bytes to KB
     core.setOutput("size", size);
     console.log(`Bundle size: ${size} KB`);
+
+    // Step 6: Create badge URL using shields.io
+    const badgeUrl = `https://img.shields.io/badge/${encodeURIComponent(label)}-${size}KB-${color}`;
+    console.log(`Badge URL: ${badgeUrl}`);
   } catch (error) {
     core.setFailed(error.message);
   }
