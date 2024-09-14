@@ -29111,26 +29111,20 @@ var __webpack_exports__ = {};
   (async function run() {
     try {
       // Step 1: Get the path and limit inputs from the user
-      const path = core.getInput("path") || "build/static/js/*.js"; // Default path to JS files
-      const limit = core.getInput("limit") || "500 KB"; // Default size limit
-      const label = core.getInput("label") || "Bundle Size"; // Badge label
-      const color = core.getInput("color") || "blue"; // Badge color
+      const path = core.getInput("path") || "build/static/js/*.js";
+      const limit = core.getInput("limit") || "500 KB";
+      const label = core.getInput("label") || "Bundle Size";
+      const color = core.getInput("color") || "blue";
 
-      // Step 2: Install necessary dependencies
-      // console.log("Installing size-limit dependencies...");
-      // execSync("npm install size-limit @size-limit/preset-app", {
-      //   stdio: "inherit",
-      // });
-
-      // Step 3: Run size-limit to generate the report
+      // Step 2: Ensure size-limit is available (if running via npx fails)
       console.log("Running size-limit...");
       (0, external_child_process_namespaceObject.execSync)(
-        "npx size-limit --json > size-report.json",
+        "./node_modules/.bin/size-limit --json > size-report.json",
         { stdio: "inherit" },
       );
       console.log("Size limit executed successfully");
 
-      // Step 4: Parse the size-limit output
+      // Step 3: Parse the size-limit output
       let report;
       try {
         report = JSON.parse(
@@ -29141,12 +29135,12 @@ var __webpack_exports__ = {};
         return;
       }
 
-      // Step 5: Extract the bundle size in KB
-      const size = Math.round(report[0].size / 1024); // Convert bytes to KB
+      // Step 4: Extract the bundle size in KB
+      const size = Math.round(report[0].size / 1024);
       core.setOutput("size", size);
       console.log(`Bundle size: ${size} KB`);
 
-      // Step 6: Create badge URL using shields.io
+      // Step 5: Create badge URL using shields.io
       const badgeUrl = `https://img.shields.io/badge/${encodeURIComponent(label)}-${size}KB-${color}`;
       console.log(`Badge URL: ${badgeUrl}`);
     } catch (error) {
