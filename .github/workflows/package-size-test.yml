@@ -21,12 +21,6 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Clean npm cache
-        run: npm cache clean --force
-
-      - name: Install dependencies
-        run: npm ci
-
       - name: List files in build directory
         run: ls -R build/static/js/
 
