@@ -28,11 +28,13 @@ import core from "@actions/core";
 
     // Step 3: Run size-limit to generate the report
     try {
-      execSync("npx size-limit --json > size-report.json");
+      console.log("Running size-limit...");
+      execSync("npx size-limit --json > size-report.json", {
+        stdio: "inherit",
+      });
+      console.log("Size limit executed successfully");
     } catch (error) {
-      core.setFailed(
-        "Failed to run size-limit. Ensure size-limit is installed and configured correctly.",
-      );
+      core.setFailed(`Failed to run size-limit: ${error.message}`);
       return;
     }
 
@@ -51,10 +53,6 @@ import core from "@actions/core";
     const size = Math.round(report[0].size / 1024); // Convert bytes to KB
     core.setOutput("size", size);
     console.log(`Bundle size: ${size} KB`);
-
-    // Step 6: Create the badge URL using shields.io
-    const badgeUrl = `https://img.shields.io/badge/${encodeURIComponent(label)}-${size}KB-${color}`;
-    console.log(`Badge URL: ${badgeUrl}`);
   } catch (error) {
     core.setFailed(error.message);
   }

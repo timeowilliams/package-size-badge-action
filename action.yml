@@ -1,6 +1,6 @@
 name: "Package Size Badge Action"
 description: "GitHub Action to calculate JavaScript package size and create a dynamic badge."
-author: "Your Name"
+author: "Timeo Williams"
 
 inputs:
   github_token:
