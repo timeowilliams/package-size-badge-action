@@ -29120,7 +29120,9 @@ var __webpack_exports__ = {};
       console.log("Running size-limit...");
       (0, external_child_process_namespaceObject.execSync)(
         "./node_modules/.bin/size-limit --json > size-report.json",
-        { stdio: "inherit" },
+        {
+          stdio: "inherit",
+        },
       );
       console.log("Size limit executed successfully");
 
