@@ -1,7 +1,6 @@
 import { execSync } from "child_process";
 import fs from "fs";
 import core from "@actions/core";
-import github from "@actions/github";
 
 (async function run() {
   try {
@@ -56,38 +55,6 @@ import github from "@actions/github";
     // Step 6: Create the badge URL using shields.io
     const badgeUrl = `https://img.shields.io/badge/${encodeURIComponent(label)}-${size}KB-${color}`;
     console.log(`Badge URL: ${badgeUrl}`);
-
-    // Step 7: Optionally, commit the badge to the repository
-    const githubToken = core.getInput("github_token");
-    if (githubToken) {
-      const octokit = github.getOctokit(githubToken);
-      const badgeContent = `![Bundle Size](${badgeUrl})`;
-      const branch = core.getInput("branch") || "main";
-
-      try {
-        await octokit.repos.createOrUpdateFileContents({
-          owner: github.context.repo.owner,
-          repo: github.context.repo.repo,
-          path: "README.md", // or any other file where you want the badge to appear
-          message: "Update bundle size badge",
-          content: Buffer.from(badgeContent).toString("base64"),
-          branch,
-          committer: {
-            name: "github-actions",
-            email: "github-actions@github.com",
-          },
-          author: {
-            name: "github-actions",
-            email: "github-actions@github.com",
-          },
-        });
-        console.log("Badge added to README.md");
-      } catch (error) {
-        core.setFailed(
-          `Failed to update the README with the badge: ${error.message}`,
-        );
-      }
-    }
   } catch (error) {
     core.setFailed(error.message);
   }
