@@ -28,7 +28,6 @@ jobs:
         uses: ./
         with:
           path: "build/static/js/*.js"
-          preset: "app"
           label: "Bundle Size"
           limit: "500"
           color: "green"
