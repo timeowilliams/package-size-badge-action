@@ -16,7 +16,7 @@
     "glob": "^11.0.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.38.1",
+    "@vercel/ncc": "^0.38.3",
     "prettier": "^3.3.3"
   }
 }
